@@ -1,0 +1,34 @@
+.DS_Store
+.well-known
+
+# node
+node_modules
+npm-debug.log
+.env
+.env.*
+!.env.example
+!.env.deploy.example
+
+# app
+.nginx
+*.nginx.conf
+
+dist*/
+
+# IDE
+.idea
+
+*.sublime-project
+*.sublime-workspace
+yarn-error.log
+.history
+.vscode-upload.json
+.cache
+package-lock.json
+*-debug.log
+*-error.log
+
+packages/*/lib
+
+.temp
+.cache

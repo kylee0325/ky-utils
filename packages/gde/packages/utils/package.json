@@ -1,0 +1,54 @@
+{
+  "name": "@gde/utils",
+  "version": "0.1.0",
+  "description": "utils for gaoding enterprise solution team",
+  "author": "luyou <luyou@gaoding.com>",
+  "homepage": "https://git.gaoding.com/gde/gde-packages",
+  "license": "MIT",
+  "maintainers": [
+    {
+      "name": "luyou",
+      "email": "luyou@gaoding.com"
+    },
+    {
+      "name": "guoran",
+      "email": "guoran@gaoding.com"
+    },
+    {
+      "name": "huanxiong",
+      "email": "huanxiong@gaoding.com"
+    }
+  ],
+  "main": "lib/index.js",
+  "module": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "publishConfig": {
+    "registry": "https://registry-npm.gaoding.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://git.gaoding.com/gde/gde-packages.git"
+  },
+  "scripts": {
+    "compile": "rollup -c",
+    "watch": "rollup -c -w",
+    "compile2": "gaoding-compile packages -o lib -c gaoding-compile.js --clear",
+    "watch2": "gaoding-compile packages -o lib -w",
+    "prepublishOnly": "yarn run compile",
+    "test": "jest"
+  },
+  "dependencies": {
+    "@vue/composition-api": "^1.3.3"
+  },
+  "devDependencies": {
+    "jest": "^27.0.6",
+    "@gaoding/compile": "^1.0.3"
+  }
+}

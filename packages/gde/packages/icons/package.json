@@ -1,0 +1,41 @@
+{
+  "name": "@gde/icons",
+  "version": "0.1.0",
+  "description": "gaoding enterprise solution team",
+  "author": "luyou <luyou@gaoding.com>",
+  "homepage": "https://git.gaoding.com/gde/gde-packages",
+  "license": "MIT",
+  "maintainers": [
+    {
+      "name": "luyou",
+      "email": "luyou@gaoding.com"
+    },
+    {
+      "name": "guoran",
+      "email": "guoran@gaoding.com"
+    },
+    {
+      "name": "huanxiong",
+      "email": "huanxiong@gaoding.com"
+    }
+  ],
+  "type": "module",
+  "main": "src/index.js",
+  "directories": {
+    "src": "src",
+    "test": "__tests__"
+  },
+  "files": [
+    "src"
+  ],
+  "publishConfig": {
+    "registry": "https://registry-npm.gaoding.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://git.gaoding.com/gde/gde-packages.git"
+  },
+  "scripts": {
+    "test": ""
+  }
+}

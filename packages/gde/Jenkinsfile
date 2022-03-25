@@ -1,0 +1,48 @@
+env.DIND_PROJECT_LABEL_DEDICATED="frontend"
+env.DIND_NOTIFY_DINGTALK_ACCESS_TOKEN = "b6b8d18677ebe64cc5ee778f7156801efdbb2fbba365a5a8cf7bfab1e7c87998";   // 钉钉群机器人 access-token
+env.DINGTALK_MOBILES = "";             // @指定人员，值格式为：手机号,手机号；@所有人，值为：all
+env.DIND_CI_CACHE_ENABLED_V2 = true; // 开启缓存
+env.DIND_CI_CACHE_KEY_ENV_KEY="GIT_BRANCH";
+env.DIND_CI_CACHE_PATHS="node_modules/";
+
+pipelineDefault.run({
+    withEnv([
+        'CDN_URL=https://cdn.dancf.com'
+    ]){
+        withCredentials([
+            string(credentialsId: 'OSS_ACCESS_KEY', variable: 'OSS_ACCESS_KEY'),
+            string(credentialsId: 'OSS_SECRET_KEY', variable: 'OSS_SECRET_KEY'),
+            string(credentialsId: 'OSS_BUCKET', variable: 'OSS_BUCKET'),
+            string(credentialsId: 'OSS_REGION', variable: 'OSS_REGION'),
+            string(credentialsId: 'GAODING_NPM_TOKEN', variable: 'GAODING_NPM_TOKEN'),
+            string(credentialsId: 'GAODING_GITHUB_TOKEN', variable: 'GH_TOKEN'),
+            string(credentialsId: 'APOLLO_GAODINGX_TOEKN', variable: 'APOLLO_GAODINGX_TOEKN'),
+            string(credentialsId: 'APOLLO_GAODINGX_USER_ID', variable: 'APOLLO_GAODINGX_USER_ID')
+        ]) {
+            stage('Build') {
+                when(['master'].contains(env.BRANCH_NAME) || env.BRANCH_NAME.indexOf('prod')>-1){
+                    sh '''
+                        yarn
+                        yarn build
+                    '''
+                }
+            }
+
+            stage('Release') {
+                when(['master'].contains(env.BRANCH_NAME) || env.BRANCH_NAME.indexOf('prod')>-1){
+                    sh '''
+                        dind-cicd-tool docs -l docs/.vuepress/dist
+                    '''
+                }
+            }
+
+            stage('Notify') {
+                when(['master'].contains(env.BRANCH_NAME) || env.BRANCH_NAME.indexOf('prod')>-1){
+                    sh '''
+                        dind-cicd-tool dingtalk -text "\n---\n[GDE文档中心](http://doc.fe.gaoding.com/gde) 发布成功 ~~"
+                    '''
+                }
+            }
+        }
+    }
+});
