@@ -1,0 +1,15 @@
+{
+  "name": "auto-icons",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "generate": "node index.js && node index2.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "luyou",
+  "license": "ISC",
+  "dependencies": {
+    "request": "^2.88.2"
+  }
+}
