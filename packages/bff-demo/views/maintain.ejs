@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="renderer" content="webkit">
+        <meta http-equiv="x-ua-compatible" content="ie=edge,chrome=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="shortcut icon" type="image/x-icon" href="https://cdn.dancf.com/gaodingx/favicon.ico">
+        <title>稿定设计企业版</title>
+        <style>
+            html {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100%;
+            }
+            .container {
+                text-align: center;
+            }
+            .image {
+                width: 86px;
+                height: 106px;
+                margin: 37px 42px;
+            }
+            .title {
+                font-weight: 600;
+                font-size: 20px;
+                line-height: 24px;
+                color: #33383E;
+                margin-top: 16px;
+                margin-bottom: 24px;
+            }
+            .tips {
+                font-size: 14px;
+                line-height: 22px;
+                color: #7F8792;
+                margin-bottom: 37px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="layout">
+            <div class="container">
+                <img class="image" src=<%= image %> alt="">
+                <div class="title"><%= title %></div>
+                <div class="tips">
+                    <%= tip1 %><br/>
+                    <%= tip2 %>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

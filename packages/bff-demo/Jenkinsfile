@@ -1,0 +1,24 @@
+env.DIND_PROJECT_LABEL_DEDICATED='nodejs';
+env.DIND_CI_PARAMS_ENABLED='true';
+env.DIND_APOLLO_APPID='xxxxxx';  // 找 SRE 相关人员配置 Apollo 获取 appid
+env.DIND_NOTIFY_DINGTALK_ACCESS_TOKEN = "xxxxxx"; // 需要配置钉钉群机器人 access-token
+
+pipelineDefault.run({
+  // 构建
+  stage('Build') {
+      when(whenHelper.checkRuntimeEnvNameIn(['dev', 'fat', 'stage', 'prod'])) {
+        sh '''
+          echo 'always-auth=true\n//registry-npm.gaoding.com/:_authToken=${DIND_NPM_REGISTRY_AUTH_TOKEN_GAODING}' > .npmrc
+          dind-container-build
+        '''
+      }
+  }
+  // 部署
+  stage('Deploy') {
+      when(whenHelper.checkRuntimeEnvNameIn(['dev', 'fat', 'stage', 'prod'])) {
+        sh '''
+        dind-helm-upgrade-v3 -a "${HELM_APP_NAME_APP}" -r "${HELM_RELEASE_NAME_APP}"  -c "${HELM_CHART_NAME}" --kubectx "${K8S_CONTEXT}" --kubens "${K8S_NAMESPACE}"
+        '''
+      }
+  }
+});

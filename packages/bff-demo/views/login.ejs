@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登录</title>
+</head>
+<body>
+    <script type="text/javascript">
+        function parseQuerystring(qs) {
+            if (!qs) qs = '';
+            qs = qs.replace(/^\??/, '').split('&');
+            var query = {};
+            for (var i = 0; i < qs.length; i++) {
+                var pair = qs[i].split('=');
+                query[pair[0]] = decodeURIComponent(pair[1]);
+            }
+            return query;
+        }
+        var query = parseQuerystring(location.search);
+        var parsed = parseQuerystring(query.state);
+        var redirectURI = encodeURIComponent(location.origin + location.pathname);
+        var url = '/api/oauth/token?grant_type=authorization_code&code=' + query.code + '&redirect_uri=' + redirectURI;
+        fetch(url, { method: 'GET' }).then(function (response) {
+            return response.json();
+        }).then(function(data) {
+            data.timestamp = Date.now();
+            localStorage.setItem('token', JSON.stringify(data));
+
+            var redirect = (parsed && parsed.redirect) || '/';
+            location.replace(redirect);
+        });
+    </script>
+</body>
+</html>

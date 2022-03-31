@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>私有化模拟登录页</title>
+</head>
+<body>
+    <h1>私有化模拟登录页</h1>
+    <p><a href="https://sso-hw.hlgdata.com?type=private_sso">SSO 登录页</a></p>
+    <p>可以手动设置 oauth_code 在链接上作为参数传入，例如 /private/login?oauth_code=32c4d0e850ee4745a3dade3edb60306a</p>
+    <h3>模板中心</h3>
+    <p><a href=<%= main_url + "/cdm/gaoding/graphic?oauth_code="+ oauth_code %> target="_blank">用户跳转模板中心（ 正确code）</a></p>
+    <p><a href=<%= main_url + "/cdm/gaoding/graphic?oauth_code="+ oauth_code + 'test' %> target="_blank">用户跳转模板中心（错误code）</a></p>
+    <p><a href=<%= main_url + "/cdm/gaoding/graphic" %> target="_blank">用户跳转模板中心（无code）</a></p>
+    <h3>个人库</h3>
+    <p><a href=<%= main_url + "/dam/my-space?oauth_code="+ oauth_code %> target="_blank">用户跳转个人库（ 正确code）</a></p>
+    <p><a href=<%= main_url + "/dam/my-space?oauth_code="+ oauth_code + 'test' %> target="_blank">用户跳转个人库（错误code）</a></p>
+    <p><a href=<%= main_url + "/dam/my-space" %> target="_blank">用户跳转个人库（无code）</a></p>
+    <h3>用户带自己的做图记录id跳转编辑器</h3>
+    <p>请手动设置 record_id 在链接上作为参数传入</p>
+    <p><a href=<%= main_url + "/design?id="+ record_id+"&mode=user&oauth_code="+ oauth_code %> target="_blank">用户带自己的做图记录id跳转编辑器（ 正确code）</a></p>
+    <p><a href=<%= main_url + "/design?id="+ record_id+"&mode=user&oauth_code="+ oauth_code + 'test' %> target="_blank">用户带自己的做图记录id跳转编辑器（错误code）</a></p>
+    <p><a href=<%= main_url + "/design?id="+ record_id+"&mode=user" %> target="_blank">用户带自己的做图记录id跳转编辑器（无code）</a></p>
+    <h3>用户带模板id跳转编辑器</h3>
+    <p>请手动设置 template_id 在链接上作为参数传入，带别人模板 id ，相同测试方式</p>
+    <p><a href=<%= main_url + "/design?id="+ template_id+"&oauth_code="+ oauth_code %> target="_blank">用户带模板id跳转编辑器（ 正确code）</a></p>
+    <p><a href=<%= main_url + "/design?id="+ template_id+"&oauth_code="+ oauth_code + 'test' %> target="_blank">用户带模板id跳转编辑器（错误code）</a></p>
+    <p><a href=<%= main_url + "/design?id="+ template_id %> target="_blank">用户带模板id跳转编辑器（无code）</a></p>
+</body>
+</html>
